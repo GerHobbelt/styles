@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-GB">
   <info>
-    <title>Cite Them Right 12th edition - Harvard (no "et al.")</title>
-    <id>http://www.zotero.org/styles/harvard-cite-them-right-no-et-al</id>
-    <link href="http://www.zotero.org/styles/harvard-cite-them-right-no-et-al" rel="self"/>
+    <title>Transactions on Maritime Science</title>
+    <title-short>TMS</title-short>
+    <id>http://www.zotero.org/styles/transactions-on-maritime-science</id>
+    <link href="http://www.zotero.org/styles/transactions-on-maritime-science" rel="self"/>
     <link href="http://www.zotero.org/styles/harvard-cite-them-right" rel="template"/>
-    <link href="http://www.citethemrightonline.com/" rel="documentation"/>
+    <link href="https://www.toms.com.hr/index.php/toms/guidelines-3" rel="documentation"/>
     <author>
       <name>Patrick O'Brien</name>
     </author>
     <category citation-format="author-date"/>
-    <category field="generic-base"/>
-    <summary>Harvard according to Cite Them Right, 12th edition.</summary>
-    <updated>2022-06-28T11:12:19+00:00</updated>
+    <category field="biology"/>
+    <issn>1848-3305</issn>
+    <eissn>1848-3313</eissn>
+    <updated>2025-03-05T14:49:57+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
   <locale xml:lang="en-GB">
@@ -29,12 +31,12 @@
     <choose>
       <if type="chapter paper-conference" match="any">
         <names variable="container-author" delimiter=", " suffix=", ">
-          <name and="text" initialize-with=". "/>
+          <name and="text" initialize-with=". " delimiter=", " sort-separator=", " name-as-sort-order="all"/>
         </names>
         <choose>
           <if variable="container-author" match="none">
             <names variable="editor translator" delimiter=", ">
-              <name and="text" initialize-with="."/>
+              <name and="text" initialize-with=". " name-as-sort-order="all"/>
               <label form="short" prefix=" (" suffix=")"/>
             </names>
           </if>
@@ -60,7 +62,7 @@
   </macro>
   <macro name="author">
     <names variable="author">
-      <name and="text" delimiter-precedes-last="never" initialize-with="." name-as-sort-order="all"/>
+      <name and="text" delimiter-precedes-last="never" initialize-with=". " name-as-sort-order="all"/>
       <label form="short" prefix=" (" suffix=")"/>
       <et-al font-style="italic"/>
       <substitute>
@@ -104,15 +106,19 @@
         </group>
       </if>
       <else-if variable="URL">
-        <text term="available at" suffix=": " text-case="capitalize-first"/>
-        <text variable="URL"/>
-        <group prefix=" (" delimiter=": " suffix=")">
-          <text term="accessed" text-case="capitalize-first"/>
-          <date form="text" variable="accessed">
-            <date-part name="day"/>
-            <date-part name="month"/>
-            <date-part name="year"/>
-          </date>
+        <group delimiter=", " suffix=".">
+          <group delimiter=": ">
+            <text term="available at" text-case="capitalize-first"/>
+            <text variable="URL"/>
+          </group>
+          <group delimiter=": ">
+            <text term="accessed"/>
+            <date form="text" variable="accessed">
+              <date-part name="day"/>
+              <date-part name="month"/>
+              <date-part name="year"/>
+            </date>
+          </group>
         </group>
       </else-if>
     </choose>
@@ -130,10 +136,10 @@
   <macro name="title">
     <choose>
       <if type="bill book legal_case legislation motion_picture report song thesis webpage graphic" match="any">
-        <group delimiter=". ">
+        <group delimiter=", ">
           <group delimiter=" ">
             <group delimiter=" ">
-              <text variable="title" font-style="italic"/>
+              <text variable="title" font-style="normal"/>
               <text variable="medium" prefix="[" suffix="]"/>
             </group>
             <text macro="number-volumes"/>
@@ -142,7 +148,7 @@
         </group>
       </if>
       <else>
-        <text variable="title" form="long" quotes="true"/>
+        <text variable="title" quotes="false"/>
       </else>
     </choose>
   </macro>
@@ -167,7 +173,7 @@
         </group>
       </else-if>
       <else-if type="article-journal article-newspaper article-magazine" match="none">
-        <group delimiter=" ">
+        <group delimiter=" " suffix=".">
           <group delimiter=", ">
             <choose>
               <if type="speech" variable="event" match="any">
@@ -255,7 +261,7 @@
       <if is-numeric="edition">
         <group delimiter=" ">
           <number variable="edition" form="ordinal"/>
-          <text term="edition" form="short" strip-periods="true"/>
+          <text term="edition" text-case="capitalize-first" strip-periods="false"/>
         </group>
       </if>
       <else>
@@ -287,30 +293,32 @@
       </group>
     </layout>
   </citation>
-  <bibliography and="text">
+  <bibliography and="text" et-al-min="4" et-al-use-first="1">
     <sort>
       <key macro="author"/>
       <key macro="year-date"/>
       <key variable="title"/>
     </sort>
-    <layout suffix=".">
+    <layout>
       <group delimiter=". ">
-        <group delimiter=" ">
+        <group delimiter=", ">
           <text macro="author"/>
-          <text macro="year-date" prefix="(" suffix=")"/>
+          <text macro="year-date"/>
+        </group>
+        <group delimiter=", ">
+          <text macro="title"/>
           <group delimiter=", ">
-            <text macro="title"/>
-            <group delimiter=" ">
+            <group delimiter=": ">
               <text macro="container-prefix"/>
               <text macro="editor"/>
-              <text macro="container-title"/>
             </group>
+            <text macro="container-title"/>
           </group>
         </group>
         <text macro="secondary-contributors"/>
         <text macro="publisher"/>
       </group>
-      <group delimiter=", " prefix=", ">
+      <group delimiter=", " prefix=", " suffix=".">
         <text macro="locator"/>
         <text macro="published-date"/>
         <text macro="pages"/>
