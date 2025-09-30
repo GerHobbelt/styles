@@ -1,45 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" demote-non-dropping-particle="sort-only">
-  <!-- Polyglot; journal publishes in English, French, Italian, German, Lithuanian and Russian. -->
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" demote-non-dropping-particle="sort-only" default-locale="en-GB">
   <info>
-    <title>Literatūra</title>
-    <title-short>Literatūra</title-short>
-    <id>http://www.zotero.org/styles/literatura</id>
-    <link href="http://www.zotero.org/styles/literatura" rel="self"/>
+    <title>Health Sciences University - UCO School of Osteopathy</title>
+    <title-short>HSU-UCO</title-short>
+    <id>http://www.zotero.org/styles/health-sciences-university-uco-school-of-osteopathy</id>
+    <link href="http://www.zotero.org/styles/health-sciences-university-uco-school-of-osteopathy" rel="self"/>
     <link href="http://www.zotero.org/styles/harvard-cite-them-right" rel="template"/>
-    <link href="https://www.journals.vu.lt/literatura/about/submissions" rel="documentation"/>
-    <link href="https://www.journals.vu.lt/literatura/libraryFiles/downloadPublic/60" rel="documentation"/>
+    <link href="https://github.com/user-attachments/files/21712084/Full-Reference-Guide-New.pdf" rel="documentation"/>
     <author>
-      <name>Domenico Cufalo</name>
-      <email>cufalo@gmail.com</email>
-      <uri>https://orcid.org/0000-0002-5930-6157</uri>
+      <name>Markus Widorski</name>
     </author>
     <category citation-format="author-date"/>
-    <category field="humanities"/>
-    <category field="linguistics"/>
-    <category field="literature"/>
-    <category field="humanities"/>
-    <category field="philosophy"/>
-    <issn>1648-1143</issn>
-    <eissn>0258-0802</eissn>
-    <updated>2025-07-23T17:48:34+00:00</updated>
+    <category field="medicine"/>
+    <summary>Harvard citation style according to UCO Full Referencing Guide 2022</summary>
+    <updated>2025-05-06T04:57:14+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
-  <locale xml:lang="it-IT">
-    <terms>
-      <term name="editor" form="short">
-        <single>ed.</single>
-        <multiple>edd.</multiple>
-      </term>
-      <term name="editortranslator" form="verb">èdito e tradotto da</term>
-      <term name="edition" form="short">ed.</term>
-      <term name="folio" form="short">
-        <single>f.</single>
-        <multiple>ff.</multiple>
-      </term>
-      <term name="volume" form="short">vol.</term>
-    </terms>
-  </locale>
   <locale xml:lang="en-GB">
     <terms>
       <term name="editor" form="short">
@@ -47,21 +23,20 @@
         <multiple>eds</multiple>
       </term>
       <term name="editortranslator" form="verb">edited and translated by</term>
-      <term name="edition" form="short">edn.</term>
+      <term name="edition" form="short">ed.</term>
     </terms>
   </locale>
   <macro name="editor">
     <choose>
       <if type="chapter paper-conference" match="any">
         <names variable="container-author" delimiter=", " suffix=", ">
-          <name and="text" delimiter-precedes-et-al="always" delimiter-precedes-last="always" et-al-min="4" et-al-use-first="3" initialize-with=". " name-as-sort-order="all"/>
+          <name and="text" initialize-with=". " delimiter=", " sort-separator=", " name-as-sort-order="all"/>
         </names>
         <choose>
           <if variable="container-author" match="none">
             <names variable="editor translator" delimiter=", ">
-              <name and="text" delimiter-precedes-et-al="always" delimiter-precedes-last="always" et-al-min="4" et-al-use-first="3" initialize-with="."/>
-              <label form="short" prefix=", "/>
-              <et-al font-style="italic"/>
+              <name and="text" initialize-with="." name-as-sort-order="all"/>
+              <label form="short" prefix=" (" suffix=")"/>
             </names>
           </if>
         </choose>
@@ -85,10 +60,9 @@
     </choose>
   </macro>
   <macro name="author">
-    <names variable="author" suffix=",">
-      <name and="text" delimiter-precedes-et-al="always" delimiter-precedes-last="always" et-al-min="4" et-al-use-first="3" initialize-with="." name-as-sort-order="all"/>
-      <label form="short" prefix=" "/>
-      <et-al font-style="italic"/>
+    <names variable="author">
+      <name and="text" delimiter-precedes-last="never" initialize-with="." name-as-sort-order="all"/>
+      <label form="short" prefix=" (" suffix=")"/>
       <substitute>
         <names variable="editor"/>
         <names variable="translator"/>
@@ -105,8 +79,7 @@
   </macro>
   <macro name="author-short">
     <names variable="author">
-      <name form="short" and="text" delimiter=", " delimiter-precedes-last="never" initialize-with=". "/>
-      <et-al font-style="italic"/>
+      <name form="short" and="text" delimiter-precedes-last="never" initialize-with=". "/>
       <substitute>
         <names variable="editor"/>
         <names variable="translator"/>
@@ -125,14 +98,15 @@
     <choose>
       <if variable="DOI">
         <group delimiter=": ">
-          <text term="available at" text-case="capitalize-first"/>
+          <text value="doi" text-case="lowercase"/>
           <text variable="DOI" prefix="https://doi.org/"/>
         </group>
       </if>
       <else-if variable="URL">
+        <text term="online" prefix="[" suffix="] " text-case="capitalize-first"/>
         <text term="available at" suffix=": " text-case="capitalize-first"/>
         <text variable="URL"/>
-        <group prefix=" (" delimiter=": " suffix=")">
+        <group delimiter=": " prefix=" [" suffix="]">
           <text term="accessed" text-case="capitalize-first"/>
           <date form="text" variable="accessed">
             <date-part name="day"/>
@@ -148,7 +122,7 @@
       <if variable="volume" match="none">
         <group delimiter=" " prefix="(" suffix=")">
           <text variable="number-of-volumes"/>
-          <label strip-periods="true" variable="volume" form="short"/>
+          <label variable="volume" form="short" strip-periods="true"/>
         </group>
       </if>
     </choose>
@@ -156,7 +130,7 @@
   <macro name="title">
     <choose>
       <if type="bill book legal_case legislation motion_picture report song thesis webpage graphic" match="any">
-        <group>
+        <group delimiter=". ">
           <group delimiter=" ">
             <group delimiter=" ">
               <text variable="title" font-style="italic"/>
@@ -168,7 +142,7 @@
         </group>
       </if>
       <else>
-        <text variable="title" quotes="false" font-style="normal"/>
+        <text variable="title" quotes="false" suffix="."/>
       </else>
     </choose>
   </macro>
@@ -240,7 +214,8 @@
       <if type="article-newspaper article-magazine post-weblog speech" match="any">
         <date variable="issued">
           <date-part name="day" suffix=" "/>
-          <date-part name="month" form="long"/>
+          <date-part name="month" form="long" suffix=" "/>
+          <date-part name="year" form="long"/>
         </date>
       </if>
     </choose>
@@ -249,7 +224,7 @@
     <choose>
       <if type="chapter paper-conference article-journal article article-magazine article-newspaper book review review-book report" match="any">
         <group delimiter=" ">
-          <label variable="page" form="short"/>
+          <label plural="never" variable="page" form="short"/>
           <text variable="page"/>
         </group>
       </if>
@@ -259,21 +234,15 @@
     <choose>
       <if variable="container-title">
         <group delimiter=". ">
-          <group delimiter=". ">
+          <group delimiter=" ">
             <text variable="container-title" font-style="italic"/>
             <choose>
               <if type="article article-journal" match="any">
                 <choose>
                   <if match="none" variable="page volume">
-                    <text term="preprint" text-case="capitalize-first" prefix="[" suffix="]"/>
+                    <text value="Preprint" prefix="[" suffix="]"/>
                   </if>
                 </choose>
-              </if>
-            </choose>
-            <choose>
-              <if type="entry-encyclopedia entry-dictionary" match="any">
-                <label plural="never" text-case="capitalize-first" variable="volume" form="short"/>
-                <text variable="volume"/>
               </if>
             </choose>
           </group>
@@ -285,29 +254,30 @@
   <macro name="edition">
     <choose>
       <if is-numeric="edition">
-        <group delimiter=" " prefix=". ">
+        <group delimiter=" ">
           <number variable="edition" form="ordinal"/>
           <text term="edition" form="short" strip-periods="true"/>
         </group>
       </if>
       <else>
-        <text variable="edition" prefix=". "/>
+        <text variable="edition"/>
       </else>
     </choose>
   </macro>
   <macro name="container-prefix">
     <choose>
-      <if type="chapter paper-conference entry-encyclopedia" match="any">
+      <if type="chapter paper-conference" match="any">
         <text term="in" text-case="capitalize-first" suffix=":"/>
       </if>
     </choose>
   </macro>
-  <citation et-al-min="4" et-al-use-first="1" disambiguate-add-year-suffix="true" disambiguate-add-names="true" disambiguate-add-givenname="true" collapse="year">
+  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="false" disambiguate-add-givenname="false" disambiguate-add-year-suffix="true" collapse="year">
     <sort>
       <key macro="year-date"/>
+      <key macro="author"/>
     </sort>
     <layout prefix="(" suffix=")" delimiter="; ">
-      <group delimiter=", ">
+      <group delimiter=" ">
         <group delimiter=", ">
           <text macro="author-short"/>
           <text macro="year-date"/>
@@ -319,7 +289,7 @@
       </group>
     </layout>
   </citation>
-  <bibliography and="text" et-al-min="4" et-al-use-first="1" hanging-indent="true">
+  <bibliography and="text">
     <sort>
       <key macro="author"/>
       <key macro="year-date"/>
@@ -329,7 +299,7 @@
       <group delimiter=". ">
         <group delimiter=" ">
           <text macro="author"/>
-          <text macro="year-date" suffix="."/>
+          <text macro="year-date" prefix="(" suffix=")."/>
           <group delimiter=". ">
             <text macro="title"/>
             <group delimiter=" ">
