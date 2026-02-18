@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" demote-non-dropping-particle="never">
+<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" class="in-text" demote-non-dropping-particle="never" default-locale="pt-BR">
   <info>
     <title>Instituto Brasileiro de Informação em Ciência e Tecnologia - ABNT (autoria completa)</title>
-    <title-short>Ibict - Autoria completa</title-short>
+    <title-short>IBICT</title-short>
     <id>http://www.zotero.org/styles/instituto-brasileiro-de-informacao-em-ciencia-e-tecnologia-abnt</id>
     <link href="http://www.zotero.org/styles/instituto-brasileiro-de-informacao-em-ciencia-e-tecnologia-abnt" rel="self"/>
     <link href="http://www.zotero.org/styles/associacao-brasileira-de-normas-tecnicas-ufmg-face-full" rel="template"/>
@@ -38,10 +38,10 @@
     </contributor>
     <category citation-format="author-date"/>
     <summary>The Brazilian Standard Style by IBICT</summary>
-    <updated>2025-10-07T00:00:00+00:00</updated>
+    <updated>2025-11-07T00:00:00+00:00</updated>
     <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
   </info>
-  <locale xml:lang="pt-BR">
+  <locale xml:lang="pt">
     <terms>
       <term name="composer">
         <single>compositor</single>
@@ -53,7 +53,6 @@
         <multiple>entrevistadores</multiple>
       </term>
       <term name="ordinal">.</term>
-      <term name="performer">intérprete(s)</term>
       <term name="recipient">
         <single>destinatário</single>
         <multiple>destinatários</multiple>
@@ -229,21 +228,8 @@
           <et-al font-style="italic"/>
         </names>
       </if>
-      <else-if type="broadcast" match="any">
-        <names variable="host">
-          <label form="long" text-case="capitalize-first" suffix=": "/>
-          <name delimiter=", " sort-separator=" " delimiter-precedes-last="always">
-            <name-part name="given"/>
-            <name-part name="family"/>
-          </name>
-          <et-al font-style="italic"/>
-        </names>
-      </else-if>
       <else-if type="patent" match="any">
-        <group delimiter=": ">
-          <text value="depositante" text-case="capitalize-first"/>
-          <text variable="authority"/>
-        </group>
+        <text variable="authority" prefix="Depositante: "/>
       </else-if>
       <else-if type="personal_communication" match="any">
         <names variable="recipient">
@@ -333,14 +319,11 @@
               </date>
             </if>
             <else-if type="patent" match="any">
-              <group delimiter=": ">
-                <text value="concessão" text-case="capitalize-first"/>
-                <date variable="issued" delimiter=" ">
-                  <date-part name="day"/>
-                  <date-part name="month" form="short"/>
-                  <date-part name="year"/>
-                </date>
-              </group>
+              <date variable="issued" delimiter=" " prefix="Concessão">
+                <date-part name="day"/>
+                <date-part name="month" form="short"/>
+                <date-part name="year"/>
+              </date>
             </else-if>
           </choose>
         </group>
@@ -364,62 +347,34 @@
   </macro>
   <macro name="locators">
     <group delimiter=", ">
-      <choose>
-        <if variable="volume" match="any">
-          <group delimiter=" ">
-            <text term="volume" form="short"/>
-            <text variable="volume"/>
-          </group>
-        </if>
-      </choose>
-      <choose>
-        <if variable="issue" match="any">
-          <group delimiter=" ">
-            <text term="issue" form="short"/>
-            <text variable="issue"/>
-          </group>
-        </if>
-      </choose>
-      <choose>
-        <if variable="edition" match="any">
-          <group delimiter=" ">
-            <text term="edition" form="short"/>
-            <text variable="edition"/>
-          </group>
-        </if>
-      </choose>
-      <choose>
-        <if variable="section" match="any">
-          <group delimiter=" ">
-            <text term="section" form="long" text-case="capitalize-first"/>
-            <text variable="section"/>
-          </group>
-        </if>
-      </choose>
-      <choose>
-        <if variable="page" match="any">
-          <group delimiter=" ">
-            <text term="page" form="short"/>
-            <text variable="page"/>
-          </group>
-        </if>
-      </choose>
-      <choose>
-        <if variable="number" match="any">
-          <group delimiter=" ">
-            <text term="number" form="short"/>
-            <text variable="number"/>
-          </group>
-        </if>
-      </choose>
-      <choose>
-        <if variable="version" match="any">
-          <group delimiter=" ">
-            <text term="version" form="long" text-case="capitalize-first"/>
-            <text variable="version"/>
-          </group>
-        </if>
-      </choose>
+      <group delimiter=" ">
+        <label variable="volume" form="short"/>
+        <text variable="volume"/>
+      </group>
+      <group delimiter=" ">
+        <label variable="issue" form="short"/>
+        <text variable="issue"/>
+      </group>
+      <group delimiter=" ">
+        <label variable="edition" form="short"/>
+        <text variable="edition"/>
+      </group>
+      <group delimiter=" ">
+        <label variable="section" text-case="capitalize-first"/>
+        <text variable="section"/>
+      </group>
+      <group delimiter=" ">
+        <label variable="page" form="short"/>
+        <text variable="page"/>
+      </group>
+      <group delimiter=" ">
+        <label variable="number" form="short"/>
+        <text variable="number"/>
+      </group>
+      <group delimiter=" ">
+        <label variable="version" form="long" text-case="capitalize-first"/>
+        <text variable="version"/>
+      </group>
     </group>
   </macro>
   <macro name="medium">
@@ -442,7 +397,7 @@
           <if variable="number-of-pages" match="any">
             <group delimiter=" ">
               <text variable="number-of-pages"/>
-              <text term="page" form="short"/>
+              <label variable="number-of-pages" form="short"/>
             </group>
           </if>
         </choose>
@@ -475,7 +430,7 @@
         <text variable="publisher-place"/>
       </if>
       <else>
-        <text term="no-place" form="short" font-style="italic" text-case="capitalize-first" prefix="[" suffix="]"/>
+        <text value="s. l." font-style="italic" prefix="[" suffix="]"/>
       </else>
     </choose>
   </macro>
@@ -521,15 +476,12 @@
   </macro>
   <macro name="submitted">
     <choose>
-      <if type="patent" match="any">
-        <group delimiter=": ">
-          <text value="depósito" text-case="capitalize-first"/>
-          <date variable="submitted" delimiter=" ">
-            <date-part name="day"/>
-            <date-part name="month" form="short"/>
-            <date-part name="year"/>
-          </date>
-        </group>
+      <if variable="submitted" match="any">
+        <date variable="submitted" delimiter=" " prefix="Depósito: ">
+          <date-part name="day"/>
+          <date-part name="month" form="short"/>
+          <date-part name="year"/>
+        </date>
       </if>
       <else>
         <text term="no date" form="short" text-case="capitalize-first" font-style="italic" prefix=", [" suffix="]"/>
@@ -541,7 +493,7 @@
       <if type="article article-newspaper article-magazine article-journal bill chapter entry-dictionary entry-encyclopedia paper-conference webpage" match="any">
         <text variable="title"/>
       </if>
-      <else-if type="broadcast motion_picture song" match="any">
+      <else-if type="motion_picture song" match="any">
         <text variable="title" text-case="uppercase"/>
       </else-if>
       <else-if type="personal_communication" match="any">
@@ -641,6 +593,7 @@
         </else-if>
         <else-if type="broadcast">
           <group delimiter=". " suffix=".">
+            <text macro="author"/>
             <text macro="title"/>
             <text macro="contributor"/>
             <text macro="guest"/>
@@ -648,7 +601,8 @@
               <group delimiter=": ">
                 <text macro="place"/>
                 <!-- Note: Use the Zotero Extra field to insert the place, e.g., Place: Rio de Janeiro. -->
-                <text macro="author"/>
+                <text variable="collection-title"/>
+                <!-- Note: Use the Zotero Series Title field to insert the podcast title or name. -->
               </group>
               <text macro="issued"/>
             </group>
